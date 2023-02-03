@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox, PhotoImage
-
+import subprocess
+import os
+import webbrowser
 
 ## // Chat Boot \\ ##
 
@@ -244,8 +246,9 @@ class chat_boot():
 
     def buscador_exit(self):
         def exit_funcion():
-            from base.system import system_exit_aplicacion
-            system_exit_aplicacion()
+            print(
+                exit()
+            )
 
         info = self.Respuesta.insert(
             END,
@@ -263,8 +266,12 @@ class chat_boot():
 
     def buscador_open_block_notas(self):
         def block_notas():
-            from base.system import system_open_notepad
-            system_open_notepad()
+            subprocess.Popen(
+                [
+                    'notepad.exe'
+                ],
+                start_new_session=True
+            )
 
         info = self.Respuesta.insert(
             END,
@@ -283,8 +290,14 @@ class chat_boot():
 
     def buscador_close_block_notas(self):
         def block_notas():
-            from base.system import system_close_notepad
-            system_close_notepad()
+            subprocess.Popen(
+                [
+                    'taskkill',
+                    '/f',
+                    '/im',
+                    'notepad.exe'
+                ]
+            )
 
         info = self.Respuesta.insert(
             END,
@@ -303,8 +316,9 @@ class chat_boot():
 
     def buscador_open_calculadora(self):
         def calculadora():
-            from base.system import system_open_calculadora
-            system_open_calculadora()
+            os.system(
+                'start calc'
+            )
 
         info = self.Respuesta.insert(
             END,
@@ -323,8 +337,14 @@ class chat_boot():
 
     def buscador_close_calculadora(self):
         def calculadora():
-            from base.system import system_close_calculadora
-            system_close_calculadora()
+            subprocess.Popen(
+                [
+                    'taskkill',
+                    '/f',
+                    '/im',
+                    'CalculatorApp.exe'
+                ]
+            )
 
         info = self.Respuesta.insert(
             END,
@@ -343,8 +363,9 @@ class chat_boot():
 
     def buscador_open_navegador(self):
         def navegador():
-            from base.browser import web_open_navegador
-            web_open_navegador()
+            webbrowser.open(
+                'https://www.google.com.mx/'
+            )
 
         info = self.Respuesta.insert(
             END,
@@ -363,8 +384,14 @@ class chat_boot():
 
     def buscador_close_navegador(self):
         def navegador():
-            from base.system import system_close_navegador
-            system_close_navegador()
+            subprocess.call(
+                [
+                    "taskkill",
+                    "/f",
+                    "/im",
+                    "msedge.exe"
+                ]
+            )
 
         info = self.Respuesta.insert(
             END,
@@ -383,8 +410,9 @@ class chat_boot():
 
     def buscador_open_youtube(self):
         def navegador():
-            from base.browser import web_open_youtube
-            web_open_youtube()
+            webbrowser.open(
+                'https://www.youtube.com/'
+            )
 
         info = self.Respuesta.insert(
             END,
@@ -403,8 +431,12 @@ class chat_boot():
 
     def buscador_open_aplicacion_musica(self):
         def musica():
-            from base.system import system_open_itunes
-            system_open_itunes()
+            subprocess.Popen(
+                [
+                    'iTunes.exe'
+                ],
+                start_new_session=True
+            )
         info = self.Respuesta.insert(
             END,
             'BOOT:  Abriendo iTunes...\n\n'
@@ -422,8 +454,14 @@ class chat_boot():
 
     def buscador_close_aplicacion_musica(self):
         def musica():
-            from base.system import system_close_itunes
-            system_close_itunes()
+            subprocess.Popen(
+                [
+                    'taskkill',
+                    '/f',
+                    '/im',
+                    'iTunes.exe'
+                ]
+            )
         info = self.Respuesta.insert(
             END,
             'BOOT:  Cerrando iTunes...\n\n'
@@ -441,8 +479,12 @@ class chat_boot():
 
     def buscador_open_explorador_archivos(self):
         def archivos():
-            from base.system import system_open_explorador_archivos
-            system_open_explorador_archivos()
+            subprocess.Popen(
+                [
+                    'explorer.exe'
+                ],
+                start_new_session=True
+            )
         info = self.Respuesta.insert(
             END,
             'BOOT:  Abriendo el Explorador de Archivos...\n\n'
@@ -460,8 +502,11 @@ class chat_boot():
 
     def buscador_open_riot_games(self):
         def riot():
-            from base.system import system_open_riot_games
-            system_open_riot_games()
+            subprocess.Popen(
+                [
+                    'C:/Riot Games/Riot Client/RiotClientServices.exe'
+                ]
+            )
         info = self.Respuesta.insert(
             END,
             'BOOT:  Abriendo Riot Games...\n\n'
@@ -479,8 +524,15 @@ class chat_boot():
 
     def buscador_close_riot_games(self):
         def riot():
-            from base.system import system_close_riot_games
-            system_close_riot_games()
+            subprocess.Popen(
+                [
+                    'taskkill',
+                    '/f',
+                    '/im',
+                    'RiotClientServices.exe'
+                ]
+            )
+
         info = self.Respuesta.insert(
             END,
             'BOOT:  Cerrando Riot Games...\n\n'
@@ -498,8 +550,10 @@ class chat_boot():
 
     def buscador_open_vsc(self):
         def vsc():
-            from base.system import system_open_vsc
-            system_open_vsc()
+            os.system(
+                'Code'
+            )
+
         info = self.Respuesta.insert(
             END,
             'BOOT:  Abriendo Visual Studio Code...\n\n'
@@ -517,8 +571,15 @@ class chat_boot():
 
     def buscador_close_vsc(self):
         def vsc():
-            from base.system import system_close_vsc
-            system_close_vsc()
+            subprocess.Popen(
+                [
+                    'taskkill',
+                    '/f',
+                    '/im',
+                    'Code.exe'
+                ]
+            )
+
         info = self.Respuesta.insert(
             END,
             'BOOT:  Cerrando Visual Studio Code...\n\n'
@@ -536,8 +597,11 @@ class chat_boot():
 
     def buscador_open_taskmgr(self):
         def taskmgr():
-            from base.system import system_open_taskmgr
-            system_open_taskmgr()
+            subprocess.Popen(
+                [
+                    'Taskmgr.exe'
+                ]
+            )
         info = self.Respuesta.insert(
             END,
             'BOOT:  Abriendo el Administrador de Tareas...\n\n'
@@ -555,8 +619,14 @@ class chat_boot():
 
     def buscador_close_taskmgr(self):
         def taskmgr():
-            from base.system import system_close_taskmgr
-            system_close_taskmgr()
+            subprocess.Popen(
+                [
+                    'taskkill',
+                    '/f',
+                    '/im',
+                    'Taskmgr.exe'
+                ]
+            )
         info = self.Respuesta.insert(
             END,
             'BOOT:  Abriendo el Administrador de Tareas...\n\n'
