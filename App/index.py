@@ -94,31 +94,6 @@ class chat_boot():
             y=0
         )
 
-        # // New Chat
-
-        nuevo_chat = Button(
-            windows,
-            text='Chat Nuevo',
-            background='#232a38',
-            foreground='white',
-            font=(
-                'Arial Black', 15
-            ),
-            border=1,
-            cursor='hand2',
-            activebackground='#232a38',
-            command=lambda: [
-                {
-
-                }
-            ]
-        )
-
-        nuevo_chat.place(
-            x=1685,
-            y=100
-        )
-
         # // Borrar Chat
 
         borrar_caht = Label(
