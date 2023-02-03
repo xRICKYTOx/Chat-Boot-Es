@@ -22,7 +22,12 @@ class chat_boot():
         windows.config(
             background='#202123'
         )
-
+        windows.title(
+            'CHAT BOOT'
+        )
+        windows.iconbitmap(
+            'App\Img\icono.ico'
+        )
         windows.attributes(
             '-fullscreen', True
         )
