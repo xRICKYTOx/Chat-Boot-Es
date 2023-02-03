@@ -31,6 +31,12 @@ class chat_boot():
         windows.attributes(
             '-fullscreen', True
         )
+        
+        # // Photo Acept Atualitation \\ #
+
+        self.photo = PhotoImage(
+            file=r'C:\Users\rikyt\OneDrive\Documentos\CHAT-BOOT\App\Img\actualitation.jpg'
+        )
 
         # // Buscador
 
