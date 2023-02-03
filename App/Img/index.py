@@ -26,16 +26,31 @@ class chat_boot():
             'CHAT BOOT'
         )
         windows.iconbitmap(
-            'App\Img\icono.ico'
+            r'C:\CHAT-BOOT\App\Img\icono.ico'
         )
         windows.attributes(
             '-fullscreen', True
         )
-        
+        windows.overrideredirect(
+            False #cambiar a true en .exe
+        )
+
         # // Photo Acept Atualitation \\ #
 
         self.photo = PhotoImage(
-            file=r'C:\Users\rikyt\OneDrive\Documentos\CHAT-BOOT\App\Img\actualitation.jpg'
+            #file=r'C:\CHAT-BOOT\App\Img\actualitation.jpg'
+        )
+
+        self.Photho_label = Label(
+            windows,
+            image=self.photo,
+            background='#202123',
+            foreground='#202123'
+        )
+
+        self.Photho_label.place(
+            x=100,
+            y=100
         )
 
         # // Buscador
@@ -123,7 +138,7 @@ class chat_boot():
         )
 
         icon_borrar = PhotoImage(
-            file=r'App\Img\clear.png'
+            file=r'C:\CHAT-BOOT\App\Img\clear.png'
         )
 
         icon = Button(
