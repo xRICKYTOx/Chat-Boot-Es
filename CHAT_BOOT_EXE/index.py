@@ -31,9 +31,6 @@ def chat_boot():
             self.windows.attributes(
                 '-fullscreen', True
             )
-            self.windows.overrideredirect(
-                True  # cambiar a true en .exe
-            )
 
             # // Buscador
 
@@ -230,9 +227,9 @@ def chat_boot():
 
         def buscador_exit(self):
             def exit_funcion():
-                print(
-                    exit()
-                )
+                windows.destroy()
+                self.windows.destroy()
+                exit()
 
             info = self.Respuesta.insert(
                 END,
@@ -1696,24 +1693,14 @@ def varify():
             windows.geometry(
                 '500x200+710+440'
             )
-            windows.overrideredirect(
-                True
-            )
             windows.resizable(
                 0, 0
             )
             windows.config(
-                background='white'
-            )
-            panel = Label(
-                windows,
                 background='#202123'
             )
-            panel.place(
-                x=10,
-                y=10,
-                width=480,
-                height=180
+            windows.iconbitmap(
+                r'C:\CHAT-BOOT\CHAT_BOOT_EXE\update.ico'
             )
             ver = Label(
                 windows,
