@@ -10,6 +10,8 @@ import shelve
 windows = Tk()
 searchs = StringVar()
 
+# // Name CHAT-BOOT \\ #
+
 
 def chat_boot():
     class chat_boot():
@@ -26,7 +28,7 @@ def chat_boot():
                 'CHAT BOOT'
             )
             self.windows.iconbitmap(
-                r'App\Img\icono.ico'
+                r'Img\icono.ico'
             )
             self.windows.attributes(
                 '-fullscreen', True
@@ -117,7 +119,7 @@ def chat_boot():
             )
 
             icon_borrar = PhotoImage(
-                file=r'App\Img\clear.png'
+                file=r'Img\clear.png'
             )
 
             icon = Button(
@@ -373,6 +375,38 @@ def chat_boot():
                         "msedge.exe"
                     ]
                 )
+                subprocess.call(
+                    [
+                        "taskkill",
+                        "/f",
+                        "/im",
+                        "brave.exe"
+                    ]
+                )
+                subprocess.call(
+                    [
+                        "taskkill",
+                        "/f",
+                        "/im",
+                        "chrome.exe"
+                    ]
+                )
+                subprocess.call(
+                    [
+                        "taskkill",
+                        "/f",
+                        "/im",
+                        "opera.exe"
+                    ]
+                )
+                subprocess.call(
+                    [
+                        "taskkill",
+                        "/f",
+                        "/im",
+                        "firefox.exe"
+                    ]
+                )
 
             info = self.Respuesta.insert(
                 END,
@@ -485,7 +519,7 @@ def chat_boot():
             def riot():
                 subprocess.Popen(
                     [
-                        'C:/Riot Games/Riot Client/RiotClientServices.exe'
+                        'RiotClientServices.exe'
                     ]
                 )
             info = self.Respuesta.insert(
@@ -1700,7 +1734,7 @@ def varify():
                 background='#202123'
             )
             windows.iconbitmap(
-                r'App\Img\update.ico'
+                r'Img\update.ico'
             )
             ver = Label(
                 windows,
@@ -1709,7 +1743,7 @@ def varify():
                 font=(
                     'Arial Black', 30
                 ),
-                text='Update ver 1.0.0'
+                text='Update ver 1.0.1'
             )
 
             ver.place(
