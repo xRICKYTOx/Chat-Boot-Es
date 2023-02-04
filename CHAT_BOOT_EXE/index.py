@@ -26,7 +26,7 @@ def chat_boot():
                 'CHAT BOOT'
             )
             self.windows.iconbitmap(
-                r'C:\CHAT-BOOT\App\Img\icono.ico'
+                r'C:\CHAT-BOOT\CHAT_BOOT_EXE\icono.ico'
             )
             self.windows.attributes(
                 '-fullscreen', True
@@ -120,7 +120,7 @@ def chat_boot():
             )
 
             icon_borrar = PhotoImage(
-                file=r'C:\CHAT-BOOT\App\Img\clear.png'
+                file=r'C:\CHAT-BOOT\CHAT_BOOT_EXE\clear.png'
             )
 
             icon = Button(
