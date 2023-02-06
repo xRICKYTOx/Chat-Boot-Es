@@ -1,15 +1,18 @@
 from tkinter import *
 from tkinter import messagebox, PhotoImage
+import tkinter as tk
 import subprocess
 import os
 import webbrowser
 import shelve
+import sqlite3
 
 ## // Chat Boot \\ ##
 
 windows = Tk()
 searchs = StringVar()
-
+Username = StringVar()
+Password = StringVar()
 # // Name CHAT-BOOT \\ #
 
 
@@ -28,7 +31,7 @@ def chat_boot():
                 'CHAT BOOT'
             )
             self.windows.iconbitmap(
-                r'Img\icono.ico'
+                r'images\icon-app.ico'
             )
             self.windows.attributes(
                 '-fullscreen', True
@@ -119,7 +122,7 @@ def chat_boot():
             )
 
             icon_borrar = PhotoImage(
-                file=r'Img\clear.png'
+                file=r'images\clear.png'
             )
 
             icon = Button(
@@ -231,6 +234,14 @@ def chat_boot():
             def exit_funcion():
                 windows.destroy()
                 self.windows.destroy()
+                subprocess.call(
+                    [
+                        "taskkill",
+                        "/f",
+                        "/im",
+                        "CHAT-BOOT.exe"
+                    ]
+                )
                 exit()
 
             info = self.Respuesta.insert(
@@ -1714,68 +1725,994 @@ def chat_boot():
     chat_boot()
 
 
-def varify():
-    with shelve.open('verification_status') as shelf:
-        if 'verified' in shelf:
-            windows.withdraw()
-            open(chat_boot())
-        else:
-            shelf['verified'] = True
-            windows.title(
-                'UPDATE'
+def log_in():
+
+    class login():
+        def __init__(
+            self
+        ):
+            self.windows = Toplevel()
+            self.windows.geometry(
+                '1000x600+425+245'
             )
-            windows.geometry(
-                '500x200+710+440'
+            self.windows.resizable(
+                False, False
             )
-            windows.resizable(
-                0, 0
+            self.windows.title(
+                ''
             )
-            windows.config(
+            self.windows.iconbitmap(
+                r'images\icon-user.ico'
+            )
+            self.windows.config(
                 background='#202123'
             )
-            windows.iconbitmap(
-                r'Img\update.ico'
-            )
-            ver = Label(
-                windows,
-                background='#202123',
-                foreground='white',
-                font=(
-                    'Arial Black', 30
-                ),
-                text='Update ver 1.0.1'
+
+            # // Panel Log In \\ #
+
+            self.Panel_log_in = tk.Label(
+                self.windows,
+                background='#232a38'
             )
 
-            ver.place(
-                x=60,
+            self.Panel_log_in.place(
+                x=0,
+                y=0,
+                width=400,
+                height=600
+            )
+
+            # // Logo \\ #
+            self.Log_img = PhotoImage(
+                file=r'images\logo-robot.png'
+            )
+
+            self.Log = tk.Label(
+                self.windows,
+                image=self.Log_img,
+                background='#202123',
+                foreground='#202123'
+            )
+
+            self.Log.place(
+                x=443,
+                y=53
+            )
+
+            # // Log In \\ #
+
+            self.Log_in_txt = tk.Label(
+                self.windows,
+                text='Log In',
+                font=(
+                    'Arial Black', 40
+                ),
+                background='#232a38',
+                foreground='white'
+            )
+
+            self.Log_in_txt.place(
+                x=105,
                 y=30
             )
 
-            button = Button(
-                windows,
-                text='CONTINUAR',
+            self.Log_in_entry_username_txt = tk.Label(
+                self.windows,
+                text='Username',
+                font=(
+                    'Arial', 18
+                ),
+                background='#232a38',
+                foreground='white'
+            )
+
+            self.Log_in_entry_username_txt.place(
+                x=50,
+                y=150
+            )
+
+            self.Log_in_entry_username = tk.Entry(
+                self.windows,
+                textvariable=Username,
                 font=(
                     'Arial', 18
                 ),
                 background='#202123',
                 foreground='white',
-                activebackground='white',
-                activeforeground='grey',
+                justify=CENTER
+            )
+
+            self.Log_in_entry_username.place(
+                x=50,
+                y=190,
+                width=300
+            )
+            self.Log_in_entry_username.delete(
+                0,
+                END
+            )
+            self.Log_in_entry_password_txt = tk.Label(
+                self.windows,
+                text='Password',
+                font=(
+                    'Arial', 18
+                ),
+                background='#232a38',
+                foreground='white'
+            )
+
+            self.Log_in_entry_password_txt.place(
+                x=50,
+                y=250
+            )
+
+            self.Log_in_entry_password = tk.Entry(
+                self.windows,
+                textvariable=Password,
+                font=(
+                    'Arial', 18
+                ),
+                background='#202123',
+                foreground='white',
+                justify=CENTER,
+                show=(
+                    '*'
+                )
+            )
+
+            self.Log_in_entry_password.place(
+                x=50,
+                y=290,
+                width=300
+            )
+
+            self.Log_in_entry_password.delete(
+                0,
+                END
+            )
+
+            # // Notview Password \\ #
+
+            self.not_view_password_txt = tk.Label(
+                self.windows,
+                text='View Password',
+                background='#232a38',
+                foreground='white',
+                font=(
+                    'Arial', 14
+                )
+            )
+
+            self.not_view_password_txt.place(
+                x=100,
+                y=343
+            )
+
+            self.not_view_password = tk.Button(
+                self.windows,
+                background='white',
+                foreground='white',
                 cursor='hand2',
-                border=2,
+                activebackground='grey',
+                activeforeground='grey',
                 command=lambda: [
                     {
-                        varify()
+                        self.view_password()
+                    }
+                ],
+                border=0
+            )
+
+            self.not_view_password.place(
+                x=70,
+                y=350,
+                width=15,
+                height=15
+            )
+
+            # // Log In Button \\ #
+
+            self.button_log_in = tk.Button(
+                self.windows,
+                text='LOG IN',
+                font=(
+                    'Arial Black', 14
+                ),
+                background='#202123',
+                activebackground='white',
+                foreground='white',
+                activeforeground='grey',
+                cursor='hand2',
+                command=lambda: self.log_in_(
+                    Username.get(), Password.get()
+                )
+            )
+
+            self.button_log_in.place(
+                x=50,
+                y=430,
+                width=300
+            )
+
+            self.button_sign_up = tk.Button(
+                self.windows,
+                text='SIGN UP',
+                font=(
+                    'Arial Black', 14
+                ),
+                background='white',
+                activebackground='#202123',
+                foreground='grey',
+                activeforeground='white',
+                cursor='hand2',
+                command=lambda: [
+                    {
+                        self.sign_up_()
                     }
                 ]
             )
 
-            button.place(
-                x=170,
-                y=115
+            self.button_sign_up.place(
+                x=50,
+                y=500,
+                width=300
+            )
+            self.windows.mainloop()
+
+        def sign_up_(self):
+            self.windows.withdraw()
+            self.Log_in_entry_username.delete(
+                0, END
+            )
+            self.Log_in_entry_password.delete(
+                0, END
+            )
+            return sign_up()
+
+        def view_password(self):
+            self.Log_in_entry_password.config(
+                show=(
+                    ''
+                )
+            )
+            view_password = tk.Button(
+                self.windows,
+                background='grey',
+                foreground='grey',
+                cursor='hand2',
+                activebackground='white',
+                activeforeground='white',
+                command=lambda: [
+                    {
+                        self.not_view_password_()
+                    }
+                ],
+                border=0
             )
 
-            windows.mainloop()
+            view_password.place(
+                x=70,
+                y=350,
+                width=15,
+                height=15
+            )
+
+        def not_view_password_(self):
+            self.Log_in_entry_password.config(
+                show=(
+                    '*'
+                )
+            )
+            not_view_password = tk.Button(
+                self.windows,
+                background='white',
+                foreground='white',
+                cursor='hand2',
+                activebackground='grey',
+                activeforeground='grey',
+                command=lambda: [
+                    {
+                        self.view_password()
+                    }
+                ],
+                border=0
+            )
+
+            not_view_password.place(
+                x=70,
+                y=350,
+                width=15,
+                height=15
+            )
+
+        def log_in_(self, username, password):
+            connect = sqlite3.connect(
+                r'users_passwords.db'
+            )
+            cursor = connect.cursor()
+
+            cursor.execute(
+                "SELECT * FROM user_password WHERE Username = ? AND Password = ?", (
+                    username, password)
+            )
+            result = cursor.fetchall()
+            if result:
+                messagebox.showinfo(
+                    "LOGIN", f"Has iniciado sesion correctamente con el usuario [{Username.get()}]"
+                )
+                self.windows.withdraw()
+                return chat_boot()
+            else:
+                messagebox.showerror(
+                    "LOGIN", f"El usuario [{Username.get()}] o la contraña son incorrectos."
+                )
+                self.Log_in_entry_username.delete(
+                    0, END
+                )
+                self.Log_in_entry_password.delete(
+                    0, END
+                )
+                return self.not_view_password_()
+
+    login()
 
 
-varify()
+def sign_up():
+
+    class sign_up():
+        def __init__(
+            self
+        ):
+            self.windows = Toplevel()
+            self.windows.geometry(
+                '1000x600+425+245'
+            )
+            self.windows.resizable(
+                False, False
+            )
+            self.windows.title(
+                ''
+            )
+            self.windows.iconbitmap(
+                r'images\icon-user.ico'
+            )
+            self.windows.config(
+                background='#202123'
+            )
+
+            # // Panel Log In \\ #
+
+            self.Panel_log_in = tk.Label(
+                self.windows,
+                background='#232a38'
+            )
+
+            self.Panel_log_in.place(
+                x=0,
+                y=0,
+                width=400,
+                height=600
+            )
+
+            # // Logo \\ #
+            self.Log_img = PhotoImage(
+                file=r'images\logo-robot.png'
+            )
+
+            self.Log = tk.Label(
+                self.windows,
+                image=self.Log_img,
+                background='#202123',
+                foreground='#202123'
+            )
+
+            self.Log.place(
+                x=443,
+                y=53
+            )
+
+            # // Sign Up \\ #
+
+            self.Log_in_txt = tk.Label(
+                self.windows,
+                text='Sign Up',
+                font=(
+                    'Arial Black', 40
+                ),
+                background='#232a38',
+                foreground='white'
+            )
+
+            self.Log_in_txt.place(
+                x=85,
+                y=30
+            )
+
+            self.Log_in_entry_username_txt = tk.Label(
+                self.windows,
+                text='Username',
+                font=(
+                    'Arial', 18
+                ),
+                background='#232a38',
+                foreground='white'
+            )
+
+            self.Log_in_entry_username_txt.place(
+                x=50,
+                y=150
+            )
+
+            self.Log_in_entry_username = tk.Entry(
+                self.windows,
+                textvariable=Username,
+                font=(
+                    'Arial', 18
+                ),
+                background='#202123',
+                foreground='white',
+                justify=CENTER
+            )
+
+            self.Log_in_entry_username.place(
+                x=50,
+                y=190,
+                width=300
+            )
+
+            self.Log_in_entry_password_txt = tk.Label(
+                self.windows,
+                text='Password',
+                font=(
+                    'Arial', 18
+                ),
+                background='#232a38',
+                foreground='white'
+            )
+
+            self.Log_in_entry_password_txt.place(
+                x=50,
+                y=250
+            )
+
+            self.Log_in_entry_password = tk.Entry(
+                self.windows,
+                textvariable=Password,
+                font=(
+                    'Arial', 18
+                ),
+                background='#202123',
+                foreground='white',
+                justify=CENTER,
+                show=(
+                    '*'
+                )
+            )
+
+            self.Log_in_entry_password.place(
+                x=50,
+                y=290,
+                width=300
+            )
+
+            # // Notview Password \\ #
+
+            self.not_view_password_txt = tk.Label(
+                self.windows,
+                text='View Password',
+                background='#232a38',
+                foreground='white',
+                font=(
+                    'Arial', 14
+                )
+            )
+
+            self.not_view_password_txt.place(
+                x=100,
+                y=343
+            )
+
+            self.not_view_password = tk.Button(
+                self.windows,
+                background='white',
+                foreground='white',
+                cursor='hand2',
+                activebackground='grey',
+                activeforeground='grey',
+                command=lambda: [
+                    {
+                        self.view_password()
+                    }
+                ],
+                border=0
+            )
+
+            self.not_view_password.place(
+                x=70,
+                y=350,
+                width=15,
+                height=15
+            )
+
+            # // Log In Button \\ #
+
+            self.button_log_in = tk.Button(
+                self.windows,
+                text='LOG IN',
+                font=(
+                    'Arial Black', 14
+                ),
+                background='#202123',
+                activebackground='white',
+                foreground='white',
+                activeforeground='grey',
+                cursor='hand2',
+                command=lambda: [
+                    {
+                        self.log_in_()
+                    }
+                ]
+            )
+
+            self.button_log_in.place(
+                x=50,
+                y=500,
+                width=300
+            )
+
+            self.button_sign_up = tk.Button(
+                self.windows,
+                text='SIGN UP',
+                font=(
+                    'Arial Black', 14
+                ),
+                background='white',
+                activebackground='#202123',
+                foreground='grey',
+                activeforeground='white',
+                cursor='hand2',
+                command=lambda: self.sign_up_(
+                    Username.get(), Password.get()
+                )
+            )
+
+            self.button_sign_up.place(
+                x=50,
+                y=430,
+                width=300
+            )
+            self.windows.mainloop()
+
+        def log_in_(self):
+            self.windows.withdraw()
+            self.Log_in_entry_username.delete(
+                0, END
+            )
+            self.Log_in_entry_password.delete(
+                0, END
+            )
+            return log_in()
+
+        def sign_up_(self, username, password):
+
+            conection = sqlite3.connect(
+                r'users_passwords.db'
+            )
+            cursor = conection.cursor()
+            cursor.execute(
+                "SELECT * FROM user_password WHERE Username = ? AND Password = ?", (username, password))
+            result = cursor.fetchall()
+
+            if result:
+                messagebox.showerror(
+                    'ERROR', f'El usuario [{Username.get()}] ya esta registrado en esta aplicacion. Porfavor inicia sesion.'
+                )
+                self.Log_in_entry_username.delete(
+                    0,
+                    END
+                )
+                self.Log_in_entry_password.delete(
+                    0,
+                    END
+                )
+                self.windows.destroy()
+                return log_in()
+            else:
+                messagebox.showinfo(
+                    'CONGRATULATIONS', f'Felicidades el usuario [{Username.get()}] se a registrado con exito!!!'
+                )
+                cursor.execute(
+                    f"INSERT INTO user_password VALUES ('{Username.get()}','{Password.get()}')"
+                )
+                conection.commit()
+                cursor.close()
+                self.Log_in_entry_username.delete(
+                    0,
+                    END
+                )
+                self.Log_in_entry_password.delete(
+                    0,
+                    END
+                )
+                self.windows.withdraw()
+                return log_in()
+
+        def view_password(self):
+            self.Log_in_entry_password.config(
+                show=(
+                    ''
+                )
+            )
+            view_password = tk.Button(
+                self.windows,
+                background='grey',
+                foreground='grey',
+                cursor='hand2',
+                activebackground='white',
+                activeforeground='white',
+                command=lambda: [
+                    {
+                        self.not_view_password_()
+                    }
+                ],
+                border=0
+            )
+
+            view_password.place(
+                x=70,
+                y=350,
+                width=15,
+                height=15
+            )
+
+        def not_view_password_(self):
+            self.Log_in_entry_password.config(
+                show=(
+                    '*'
+                )
+            )
+            not_view_password = tk.Button(
+                self.windows,
+                background='white',
+                foreground='white',
+                cursor='hand2',
+                activebackground='grey',
+                activeforeground='grey',
+                command=lambda: [
+                    {
+                        self.view_password()
+                    }
+                ],
+                border=0
+            )
+
+            not_view_password.place(
+                x=70,
+                y=350,
+                width=15,
+                height=15
+            )
+
+    sign_up()
+
+
+class login():
+    def __init__(
+        self
+    ):
+        windows.geometry(
+            '1000x600+425+245'
+        )
+        windows.resizable(
+            False, False
+        )
+        windows.title(
+            ''
+        )
+        windows.iconbitmap(
+            r'images\icon-user.ico'
+        )
+        windows.config(
+            background='#202123'
+        )
+
+        # // Panel Log In \\ #
+
+        self.Panel_log_in = tk.Label(
+            windows,
+            background='#232a38'
+        )
+
+        self.Panel_log_in.place(
+            x=0,
+            y=0,
+            width=400,
+            height=600
+        )
+
+        # // Logo \\ #
+        self.Log_img = PhotoImage(
+            file=r'images\logo-robot.png'
+        )
+
+        self.Log = tk.Label(
+            windows,
+            image=self.Log_img,
+            background='#202123',
+            foreground='#202123'
+        )
+
+        self.Log.place(
+            x=443,
+            y=53
+        )
+
+        # // Log In \\ #
+
+        self.Log_in_txt = tk.Label(
+            windows,
+            text='Log In',
+            font=(
+                'Arial Black', 40
+            ),
+            background='#232a38',
+            foreground='white'
+        )
+
+        self.Log_in_txt.place(
+            x=105,
+            y=30
+        )
+
+        self.Log_in_entry_username_txt = tk.Label(
+            windows,
+            text='Username',
+            font=(
+                'Arial', 18
+            ),
+            background='#232a38',
+            foreground='white'
+        )
+
+        self.Log_in_entry_username_txt.place(
+            x=50,
+            y=150
+        )
+
+        self.Log_in_entry_username = tk.Entry(
+            windows,
+            textvariable=Username,
+            font=(
+                'Arial', 18
+            ),
+            background='#202123',
+            foreground='white',
+            justify=CENTER
+        )
+
+        self.Log_in_entry_username.place(
+            x=50,
+            y=190,
+            width=300
+        )
+
+        self.Log_in_entry_password_txt = tk.Label(
+            windows,
+            text='Password',
+            font=(
+                'Arial', 18
+            ),
+            background='#232a38',
+            foreground='white'
+        )
+
+        self.Log_in_entry_password_txt.place(
+            x=50,
+            y=250
+        )
+
+        self.Log_in_entry_password = tk.Entry(
+            windows,
+            textvariable=Password,
+            font=(
+                'Arial', 18
+            ),
+            background='#202123',
+            foreground='white',
+            justify=CENTER,
+            show=(
+                '*'
+            )
+        )
+
+        self.Log_in_entry_password.place(
+            x=50,
+            y=290,
+            width=300
+        )
+
+        # // Notview Password \\ #
+
+        self.not_view_password_txt = tk.Label(
+            windows,
+            text='View Password',
+            background='#232a38',
+            foreground='white',
+            font=(
+                'Arial', 14
+            )
+        )
+
+        self.not_view_password_txt.place(
+            x=100,
+            y=343
+        )
+
+        self.not_view_password = tk.Button(
+            windows,
+            background='white',
+            foreground='white',
+            cursor='hand2',
+            activebackground='grey',
+            activeforeground='grey',
+            command=lambda: [
+                {
+                    self.view_password()
+                }
+            ],
+            border=0
+        )
+
+        self.not_view_password.place(
+            x=70,
+            y=350,
+            width=15,
+            height=15
+        )
+
+        # // Log In Button \\ #
+
+        self.button_log_in = tk.Button(
+            windows,
+            text='LOG IN',
+            font=(
+                'Arial Black', 14
+            ),
+            background='#202123',
+            activebackground='white',
+            foreground='white',
+            activeforeground='grey',
+            cursor='hand2',
+            command=lambda: self.log_in_(
+                Username.get(), Password.get()
+            )
+        )
+
+        self.button_log_in.place(
+            x=50,
+            y=430,
+            width=300
+        )
+
+        self.button_sign_up = tk.Button(
+            windows,
+            text='SIGN UP',
+            font=(
+                'Arial Black', 14
+            ),
+            background='white',
+            activebackground='#202123',
+            foreground='grey',
+            activeforeground='white',
+            cursor='hand2',
+            command=lambda: [
+                {
+                    self.sign_up_()
+                }
+            ]
+        )
+
+        self.button_sign_up.place(
+            x=50,
+            y=500,
+            width=300
+        )
+        windows.mainloop()
+
+    def sign_up_(self):
+        windows.withdraw()
+        self.Log_in_entry_username.delete(
+            0, END
+        )
+        self.Log_in_entry_password.delete(
+            0, END
+        )
+        return sign_up()
+
+    def view_password(self):
+        self.Log_in_entry_password.config(
+            show=(
+                ''
+            )
+        )
+        view_password = tk.Button(
+            windows,
+            background='grey',
+            foreground='grey',
+            cursor='hand2',
+            activebackground='white',
+            activeforeground='white',
+            command=lambda: [
+                {
+                    self.not_view_password_()
+                }
+            ],
+            border=0
+        )
+
+        view_password.place(
+            x=70,
+            y=350,
+            width=15,
+            height=15
+        )
+
+    def not_view_password_(self):
+        self.Log_in_entry_password.config(
+            show=(
+                '*'
+            )
+        )
+        not_view_password = tk.Button(
+            windows,
+            background='white',
+            foreground='white',
+            cursor='hand2',
+            activebackground='grey',
+            activeforeground='grey',
+            command=lambda: [
+                {
+                    self.view_password()
+                }
+            ],
+            border=0
+        )
+
+        not_view_password.place(
+            x=70,
+            y=350,
+            width=15,
+            height=15
+        )
+
+    def log_in_(self, username, password):
+        connect = sqlite3.connect(
+            r'users_passwords.db'
+        )
+        cursor = connect.cursor()
+
+        cursor.execute(
+            "SELECT * FROM user_password WHERE Username = ? AND Password = ?", (
+                username, password)
+        )
+        result = cursor.fetchall()
+        if result:
+            messagebox.showinfo(
+                "LOGIN", f"Has iniciado sesion correctamente con el usuario [{Username.get()}]"
+            )
+            windows.withdraw()
+            return chat_boot()
+        else:
+            messagebox.showerror(
+                "LOGIN", f"El usuario [{Username.get()}] o la contraña son incorrectos."
+            )
+            self.Log_in_entry_username.delete(
+                0, END
+            )
+            self.Log_in_entry_password.delete(
+                0, END
+            )
+            return self.not_view_password_()
+
+
+login()
