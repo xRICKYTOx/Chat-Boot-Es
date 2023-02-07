@@ -1,3 +1,3 @@
-function open_download(){
+function open_download() {
     window.open('download.html')
 }
