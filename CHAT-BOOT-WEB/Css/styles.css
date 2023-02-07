@@ -1,12 +1,10 @@
-body
-{
+body {
     margin: 0;
     background-color: #202123;
     display: grid;
 }
 
-.panel
-{
+.panel {
     background-color: #2b79c2;
     width: 1900px;
     height: 70px;
@@ -16,8 +14,7 @@ body
     border-radius: 28px
 }
 
-.principal
-{
+.principal {
     color: white;
     background-color: #2b79c2;
     border: 0px;
@@ -29,8 +26,7 @@ body
     cursor: pointer;
 }
 
-.correo
-{
+.correo {
     color: white;
     background-color: #2b79c2;
     border: 0px;
@@ -43,8 +39,7 @@ body
 }
 
 
-.descargar
-{
+.descargar {
     color: white;
     background-color: #2b79c2;
     border: 0px;
@@ -56,26 +51,22 @@ body
     cursor: pointer;
 }
 
-.logo
-{
+.logo {
     position: relative;
-    top: 8px;
-    left: 20px;
+    top: -52px;
+    left: 25px;
     border-radius: 50%;
     width: 50px;
 }
 
-.principal:active
-{
+.principal:active {
     color: grey;
 }
 
-.correo:active
-{
+.correo:active {
     color: grey;
 }
 
-.descargar:active
-{
+.descargar:active {
     color: grey;
 }
