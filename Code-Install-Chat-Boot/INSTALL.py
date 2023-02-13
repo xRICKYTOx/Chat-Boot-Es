@@ -559,7 +559,7 @@ def exe1():
 
             self.Texto.insert(
                 END,
-                '\n  VERSION 1.0.0\n\n En estas version tendras que crearte \n una cuenta para poder continuar ya \n que en actualisaciones futuras \n pondremos una funcion la cual nos \n ayudara a mejorar el comportamiento \n de nuestro boot. \n\n Por parte de nuestro programador \n xRICKYTOx se les agradeceria en su \n colaboracion para el mejoramiento de \n diferentes funciones de nuestra app o \n aplicacion. \n\n En actulisaciones futuras agregaremos \n nuevas funciones las cuales \n mensionaremos en cada uno de los \n parches. \n\n Algunos ejemplos que les podras pedir \n al boot es que te pueda abrir diferentes \n aplicaciones asi como interactuar de \n manera simple. Por el momento \n tenemos muy limitada la informacion \n que esta implementada para este \n programa. \n\n Todos los derechos estan reservados \n por el desarrollador xRICKYTOx. \n\n ©Copyright 2023-2024 \n'
+                '\n  VERSION 1.0.1\n\n En estas version tendras que crearte \n una cuenta para poder continuar ya \n que en actualisaciones futuras \n pondremos una funcion la cual nos \n ayudara a mejorar el comportamiento \n de nuestro boot. \n\n Por parte de nuestro programador \n xRICKYTOx se les agradeceria en su \n colaboracion para el mejoramiento de \n diferentes funciones de nuestra app o \n aplicacion. \n\n En actulisaciones futuras agregaremos \n nuevas funciones las cuales \n mensionaremos en cada uno de los \n parches. \n\n Algunos ejemplos que les podras pedir \n al boot es que te pueda abrir diferentes \n aplicaciones asi como interactuar de \n manera simple. Por el momento \n tenemos muy limitada la informacion \n que esta implementada para este \n programa. \n\n Todos los derechos estan reservados \n por el desarrollador xRICKYTOx. \n\n ©Copyright 2023-2024 \n'
             )
 
             self.Texto.after(
@@ -574,8 +574,8 @@ def exe1():
 
             self.Srll.place(
                 x=570,
-                y=10,
-                width=20,
+                y=13,
+                width=13,
                 height=415
             )
 
@@ -730,7 +730,7 @@ class exe():
 
         self.Texto.insert(
             END,
-            '\n  VERSION 1.0.0\n\n En estas version tendras que crearte \n una cuenta para poder continuar ya \n que en actualisaciones futuras \n pondremos una funcion la cual nos \n ayudara a mejorar el comportamiento \n de nuestro boot. \n\n Por parte de nuestro programador \n xRICKYTOx se les agradeceria en su \n colaboracion para el mejoramiento de \n diferentes funciones de nuestra app o \n aplicacion. \n\n En actulisaciones futuras agregaremos \n nuevas funciones las cuales \n mensionaremos en cada uno de los \n parches. \n\n Algunos ejemplos que les podras pedir \n al boot es que te pueda abrir diferentes \n aplicaciones asi como interactuar de \n manera simple. Por el momento \n tenemos muy limitada la informacion \n que esta implementada para este \n programa. \n\n Todos los derechos estan reservados \n por el desarrollador xRICKYTOx. \n\n ©Copyright 2023-2024 \n'
+            '\n  VERSION 1.0.1\n\n En estas version tendras que crearte \n una cuenta para poder continuar ya \n que en actualisaciones futuras \n pondremos una funcion la cual nos \n ayudara a mejorar el comportamiento \n de nuestro boot. \n\n Por parte de nuestro programador \n xRICKYTOx se les agradeceria en su \n colaboracion para el mejoramiento de \n diferentes funciones de nuestra app o \n aplicacion. \n\n En actulisaciones futuras agregaremos \n nuevas funciones las cuales \n mensionaremos en cada uno de los \n parches. \n\n Algunos ejemplos que les podras pedir \n al boot es que te pueda abrir diferentes \n aplicaciones asi como interactuar de \n manera simple. Por el momento \n tenemos muy limitada la informacion \n que esta implementada para este \n programa. \n\n Todos los derechos estan reservados \n por el desarrollador xRICKYTOx. \n\n ©Copyright 2023-2024 \n'
         )
 
         self.Texto.after(
@@ -745,8 +745,8 @@ class exe():
 
         self.Srll.place(
             x=570,
-            y=10,
-            width=20,
+            y=13,
+            width=13,
             height=415
         )
 
