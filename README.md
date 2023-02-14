@@ -29,4 +29,4 @@
 
 ![Alt text](https://i.imgur.com/402k5sF.png)
 
->5. Ejecuta el programa INSTALL y sigue todos los pasos
+>5. Ejecuta el programa INSTALL y sigue todos los 
