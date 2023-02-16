@@ -25,7 +25,7 @@
 ### Estas son las acciones que podrás realizar en esta actualización.
 
 #
-# Instalación 💻⌨️
+# Instalación 💻
 
 
 ### La forma de instalarlo es dirigiéndote al apartado de a la parte superior donde de dice Code, y presionar donde dice Download Zip.
